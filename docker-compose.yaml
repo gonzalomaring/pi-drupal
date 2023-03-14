@@ -2,7 +2,9 @@ version: '3'
 
 services:
   drupal1:
-    image: drupal:9.4.8-php8.1-apache
+    container_name: drupal1
+    image: gonzalomarin/drupal:latest
+    build: .
     restart: always
     environment:
       DRUPAL_DATABASE_HOST: mariadb
@@ -16,6 +18,7 @@ services:
       - mariadb
 
   mariadb:
+    container_name: mariadb
     image: mariadb
     restart: always
     environment:
@@ -31,10 +34,11 @@ services:
      restart: always
      ports:
       - 8080:80
+      - 8443:4443
      volumes:
       - "./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
 
 
 volumes:
-  drupal-data:
   mariadb-data:
+  drupal-data:
