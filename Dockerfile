@@ -1,3 +1,2 @@
-FROM drupal:9.4.8-php8.1-apache
-#RUN apt-get update && apt-get install php-xdebug && apt-get clean && rm -rf /var/lib/apt/lists/*
+FROM drupal:10.0.1-apache
 RUN pecl install xdebug

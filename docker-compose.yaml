@@ -3,12 +3,10 @@ version: '3'
 services:
   drupal:
     container_name: drupal
-#    image: gonzalomarin/drupal:latest
-    image: drupal:10.0.1-apache
-#    build: .
+    image: gonzalomarin/drupal:latest
+#    image: drupal:10.0.1-apache
+    build: .
     restart: always
-#    ports:
-#     - 8081:80
     environment:
       DRUPAL_DATABASE_HOST: mariadb
       DRUPAL_DATABASE_PORT: 3306
@@ -67,7 +65,7 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     ports:
-     - 9090:9090 
+     - 9090:9090
 
   loki:
     image: grafana/loki:2.0.0
