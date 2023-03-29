@@ -1,13 +1,22 @@
-# El objetivo de este repositorio es trabajar con Drupal y MariaDB, dockerizando el CMS
+# Recolección de logs de Drupal
 
-## Primera versión
+Para esta tarea usaremos Grafana, Loki y Fluent Bit para la recolección de logs sobre un escenario con Drupal, MariaDB y HAProxy
 
-En esta versión usaremos un docker compose para crear los contenedores MariaDB y Drupal, usando una versión específica para este.
+## Versión Actual
 
-## Segunda versión 
+Actualmente estamos usando una imagen de Drupal creada por mi, en la cual ya nos encontramos el Drupal funcionando en su versión 9.4. Las credenciales por defecto son "admin:admin" y por defecto se conectará a una base de datos llamada "drupal", al usuario "user" con contraseña "password".
+Si deseamos usar otra imagen, recomendaría "drupal:9.4-php8.0-apache-bullseye".
 
-En esta versión añadiremos un balanceador de carga HAProxy
+Antes de bajar el contenedor MariaDB es necesario ejecutar el siguiente comando:
 
-## Tercera versión 
+~~~
 
-En esta tercera versión añadiremos un sistema de monitorización
+docker exec drupal mysqldump -u user -pclave drupal -h mariadb > mariadb/drupal.sql
+
+~~~
+
+
+### Próximas mejoras del escenario
+
+Está planificado añadir monitorización.
+
