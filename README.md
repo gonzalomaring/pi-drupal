@@ -10,9 +10,7 @@ Si deseamos usar otra imagen, recomendaría "drupal:9.4-php8.0-apache-bullseye".
 Antes de bajar el contenedor MariaDB es necesario ejecutar el siguiente comando:
 
 ~~~
-
 docker exec drupal mysqldump -u user -pclave drupal -h mariadb > mariadb/drupal.sql
-
 ~~~
 
 
