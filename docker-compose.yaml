@@ -3,18 +3,11 @@ version: '3'
 services:
   drupal:
     container_name: drupal
-    image: gonzalomarin/drupal:latest
-#    image: drupal:10.0.1-apache
-    build: .
+    image: gonzalomarin/drupalb:v2
     restart: always
-    environment:
-      DRUPAL_DATABASE_HOST: mariadb
-      DRUPAL_DATABASE_PORT: 3306
-      DRUPAL_DATABASE_NAME: drupal
-      DRUPAL_DATABASE_USER: drupal
-      DRUPAL_DATABASE_PASSWORD: drupal
     volumes:
-      - drupal-data:/var/www/html
+      - drupal-data:/opt/drupal/web/
+      - ./mariadb/drupal.sql:/data/bd/drupal.sql
     depends_on:
       - mariadb
     logging:
@@ -42,7 +35,6 @@ services:
      restart: always
      ports:
       - 8080:80
-#      - 8443:4443
      volumes:
       - "./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
 
@@ -101,3 +93,4 @@ volumes:
   drupal-data:
   grafana-data:
   prometheus_data:
+  drupal-backup:
