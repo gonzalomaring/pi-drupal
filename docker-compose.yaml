@@ -2,14 +2,14 @@ version: '3'
 
 services:
   drupal:
-    container_name: drupal
-    image: gonzalomarin/drupalb:v2
+    image: drupal:9.4-php8.0-apache-bullseye
     restart: always
     volumes:
       - drupal-data:/opt/drupal/web/
-      - ./mariadb/drupal.sql:/data/bd/drupal.sql
     depends_on:
       - mariadb
+    ports:
+      - "8081-8082:80"
     logging:
       driver: fluentd
       options:
