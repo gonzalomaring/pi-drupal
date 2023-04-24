@@ -12,6 +12,6 @@ Para esta tarea usaremos Loki + Fluent Bit, siendo Grafana el panel elegido para
 
 ## Monitorización
 
-El escenario estará montado en Docker usando Docker-Compose, por lo que usaremos Prometheus + Node Exporter para monitorizar la máquina host.
+El escenario estará montado en Docker usando Docker-Compose, por lo que usaremos Prometheus + Node Exporter para monitorizar la máquina host, usando el panel de Node Exporter para visualizar la monitorizacion.
 
 
