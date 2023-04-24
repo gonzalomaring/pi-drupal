@@ -85,6 +85,13 @@ services:
     container_name: node-exporter
     ports:
       - "9100:9100"
+    volumes:
+      - /etc/hostname:/etc/nodename:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /mnt/docker-cluster:/mnt/docker-cluster:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/TZ:ro
 
 
 volumes:
