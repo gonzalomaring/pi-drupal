@@ -104,6 +104,16 @@ services:
     volumes:
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
 
+# Monitorizacion BBDD
+
+  mysql-exporter:
+    container_name: mysql-exporter
+    image: prom/mysqld-exporter
+    environment:
+      - DATA_SOURCE_NAME=root:root@(mariadb:3306)/
+    ports:
+      - "9104:9104"
+
 
 volumes:
   mariadb-data:
