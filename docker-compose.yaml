@@ -20,10 +20,13 @@ services:
         fluentd-address: localhost:24224
         tag: drupal.logs
 
+
   mariadb:
     container_name: mariadb
     image: mariadb
     restart: always
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: drupal
@@ -52,7 +55,11 @@ services:
       - 3000:3000
      depends_on:
        - loki
+     environment:
+       GF_SECURITY_ADMIN_PASSWORD: admin
+       GF_SECURITY_API_KEY: eyJrIjoiTHhWbVlUR0NGUVJpTlNiSnB5SWZGdjNVNkUzOHNTMFUiLCJuIjoiYWRtaW4iLCJpZCI6MX0=
      volumes:
+     - grafana-data:/var/lib/grafana
      - ./grafana/provisioning:/etc/grafana/provisioning
 
 #Monitorizacion
