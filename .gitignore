@@ -1,2 +1,2 @@
-#Ignoramos los archivos de drupal
-drupal
+#Ignoramos la cache de python
+python/funciones/__pycache__/
