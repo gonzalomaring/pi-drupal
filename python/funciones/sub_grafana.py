@@ -27,47 +27,64 @@ def grafana_data(url,key):
         else:
             url = ds['url']
         print(f"{ds['name']}: {url}")
+    print()
 
 #Función para mostrar información sobre el usuario conectado
 
+def grafana_lsuser(grafana_api):
+    users = grafana_api.users.find_user('admin')
+    print("Nombre del usuario: ", users['login'])
+    print("Fecha de creación: ", users['createdAt'])
+    cadena = '¿Es admin?: ' + str(users['isGrafanaAdmin'])
+    cadena = cadena.replace('True', 'Verdadero')
+    print(cadena)
+    print()
 
-def grafana_lsuser(url, key):
-    # Realiza la solicitud GET para obtener información del usuario
-    users_url = url + "user"
-    # Especificamos los headers para la autenticación
-    headers = {
-        "Authorization": "Bearer " + key,
-        "Content-Type": "application/json"
-    }
-    response = requests.get(users_url, headers=headers)
-    if response.status_code == 200:
-        user_info = response.json()
-        print(f"Nombre de usuario: {user_info['login']}")
-        print(f"Email: {user_info['email']}")
-    else:
-        print("Error al obtener información del usuario:", response.json())
 
-def grafana_adduser(url, key):
-    # Realiza la solicitud POST para crear un nuevo usuario
-    users_url = url + "admin/users"
-    # Especificamos los headers para la autenticación
-    headers = {
-        "Authorization": "Bearer " + key,
-        "Content-Type": "application/json"
-    }
-    # Solicitamos los datos del nuevo usuario
-    username = input("Ingrese el nombre de usuario: ")
-    email = input("Ingrese el email: ")
-    password = input("Ingrese la contraseña: ")
-    # Creamos el payload
-    payload = {
-        "name": username,
-        "email": email,
-        "login": username,
-        "password": password
-    }
-    response = requests.post(users_url, headers=headers, json=payload)
-    if response.status_code == 200:
-        print("Usuario creado con éxito")
-    else:
-        print("Error al crear el usuario:", response.json())
+#Función para añadir un nuevo usuario
+def grafana_adduser(grafana_api):
+    nombre=input("Introduzca el nombre del usuario: ")
+    email=input("Introduzca el email del usuario: ")
+    login=input("Introduzca el nombre de login del usuario: ")
+    password=input("Introduzca la contraseña del usuario: ")
+
+    user = grafana_api.admin.create_user({"name": nombre, "email": email, "login": login, "password": password, "OrgId": 1})
+
+#Función para mostrar información sobre un usuario
+def grafana_userinfo(grafana_api):
+    usuario=input("Introduzca el nombre del usuario: ")
+    users = grafana_api.users.find_user(usuario)
+    print("Nombre del usuario: ", users['login'])
+    print("Fecha de creación: ", users['createdAt'])
+    print()
+
+#Función para mostrar dashboards
+def grafana_dashboards(grafana_api):
+    while True:
+        print("Dashboards disponibles:")
+        print("1. MySQL")
+        print("2. Node Exporter")
+        print("3. Salir")
+        print()
+
+        option = input("Seleccione una opción: ")
+        print()
+
+        if option == "1":
+            uid="MQWgroiiz"
+            dashboards = grafana_api.dashboard.get_dashboard(uid)
+            print("Nombre del dashboard: ",dashboards['dashboard']['title'])
+            print("Descripción del dashboard: ",dashboards['dashboard']['description'])
+            print("UID del dashboard:", uid)
+            print()
+        elif option == "2":
+            uid="rYdddlPWk"
+            dashboards = grafana_api.dashboard.get_dashboard(uid)
+            print("Nombre del dashboard: ",dashboards['dashboard']['title'])
+            print("Descripción del dashboard: ",dashboards['dashboard']['description'])
+            print("UID del dashboard:", uid)
+        elif option == "3":
+            break
+        else:
+            print("Opción no válida. Inténtelo de nuevo.")
+            print()
