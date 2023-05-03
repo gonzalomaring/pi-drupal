@@ -42,12 +42,13 @@ def grafana_menu():
         print("3. Añadir usuario")
         print("4. Información sobre usuario")
         print("5. Ver dashboards")
-#        print(". Eliminar usuario ")
-#        print(". Modificar contraseña usuario")
-#        print(". Ver carpetas")
-#        print(". Ver alertas")
-#        print(". Ver organizaciones")
-        print("6. Salir")
+        print("6. Eliminar usuario ")
+        print("7. Modificar contraseña usuario")
+        print("8. Ver carpetas")
+        print("9. Crear carpeta")
+        print("10. Eliminar carpeta")
+        print("11. Ver organizaciones")
+        print("12. Salir")
         print()
 
         option = input("Seleccione una opción: ")
@@ -64,6 +65,18 @@ def grafana_menu():
         elif option == "5":
             grafana_dashboards(grafana_api)
         elif option == "6":
+            grafana_deluser(grafana_api)
+        elif option == "7":
+            grafana_modpasswd(grafana_api)
+        elif option == "8":
+            grafana_folders(grafana_api)
+        elif option == "9":
+            grafana_addfolder(grafana_api)
+        elif option == "10":
+            grafana_delfolder(grafana_api)
+        elif option == "11":
+            grafana_orgs(grafana_api)
+        elif option == "12":
             break
         else:
             print("Opción no válida. Inténtelo de nuevo.")
