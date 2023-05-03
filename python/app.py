@@ -2,5 +2,5 @@ from funciones.menu import show_menu
 from funciones.login import login
 
 #Programa principal
-#login()
+login()
 show_menu()
