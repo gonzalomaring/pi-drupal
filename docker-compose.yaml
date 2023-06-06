@@ -121,7 +121,6 @@ services:
     ports:
       - "9104:9104"
 
-
 volumes:
   mariadb-data:
   drupal-data:
